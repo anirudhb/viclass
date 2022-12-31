@@ -15,9 +15,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-from fastapi import FastAPI
+#from fastapi import FastAPI
 
-app = FastAPI()
+#app = FastAPI()
 
 class ConnectionManager:
     def __init__(self):

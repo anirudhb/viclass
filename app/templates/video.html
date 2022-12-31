@@ -17,16 +17,18 @@
                         src="{{url}}">
                         </iframe>
                     </div>
+                    <h1>WebSocket Chat</h1>
+                    <button class="btn btn-primary align-self-start" onClick="showForm(event)" id="connect">Connect</button>
+                    <form class="" action="" onsubmit="sendMessage(event)" id="form" style="display: none">
+                        <div class="mt-1 column">
+                            <input type="text" class="form-control" id="messageText" autocomplete="off"/>
+                            <button type="submit" class="mt-2 btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                    <ul id='messages'>
+                    </ul>
                 </div>
             </div>
-    <h1>WebSocket Chat</h1>
-        <button onClick="showForm(event)" id="connect">Connect</button>
-        <form action="" onsubmit="sendMessage(event)" id="form" style="display: none">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button type="submit">Send</button>
-        </form>
-        <ul id='messages'>
-        </ul>
         <script>
             var clientID = Date.now();
             var ws = new WebSocket(`ws://localhost:8000/ws/${clientID}`);
