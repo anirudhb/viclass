@@ -58,6 +58,7 @@
 
             var clientID = Date.now();
             var ws = new WebSocket(`ws://localhost:8000/ws/${clientID}`);
+            ws.onmessage = processMessage;
 
             function formatTimestamp(timestamp) {
                 let hours = 0;
@@ -71,7 +72,7 @@
                     minutes -= 60;
                     hours++;
                 }
-                return `${hours > 0 ? hours.toString() + ":" : ""}${minutes}:${Math.round(seconds).toString().padStart(2, "0")}`;
+                return `${hours > 0 ? hours.toString() + ":" : ""}${minutes}:${Math.fround(seconds).toString().padStart(2, "0")}`;
             }
 
             function addMessage(timestamp, message) {
@@ -90,17 +91,18 @@
             }
 
             function processMessage(event) {
-                addMessage(event.data.message, event.data.timestamp);
+                console.log(event);
+                let d = JSON.parse(event.data);
+                addMessage(d.message, d.timestamp);
             }
 
-            ws.onmessage = processMessage;
 
             function sendMessage(event) {
                 var input = document.getElementById("messageText")
                 var message = input.value
                 var timestamp = player.getCurrentTime()
-                addMessage(timestamp, message)
-                ws.send({ timestamp, message });
+                //addMessage(timestamp, message)
+                ws.send(JSON.stringify({ timestamp, message }));
 
                 input.value = ''
                 event.preventDefault()
