@@ -74,7 +74,7 @@
                     minutes -= 60;
                     hours++;
                 }
-                return `${hours > 0 ? hours.toString() + ":" : ""}${minutes}:${Math.fround(seconds).toString().padStart(2, "0")}`;
+                return `${hours > 0 ? hours.toString() + ":" : ""}${minutes}:${seconds.toString().padStart(2, "0")}`;
             }
 
             function addMessage(timestamp, message) {
@@ -95,14 +95,14 @@
             function processMessage(event) {
                 console.log(event);
                 let d = JSON.parse(event.data);
-                addMessage(d.message, d.timestamp);
+                addMessage(d.timestamp, d.message);
             }
 
 
             function sendMessage(event) {
                 var input = document.getElementById("messageText")
                 var message = input.value
-                var timestamp = player.getCurrentTime()
+                var timestamp = Math.round(player.getCurrentTime())
                 //addMessage(timestamp, message)
                 ws.send(JSON.stringify({ timestamp, message }));
 
