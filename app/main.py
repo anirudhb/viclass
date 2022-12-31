@@ -70,7 +70,7 @@ async def handle_form(video_title: str = Form(...), url: str = Form(...), profna
 
 @app.get("/video/{profname}/{video_title}/{url}", response_class=HTMLResponse)
 async def read_item(request: Request, profname: str,video_title: str, url: str):
-    video_url = "https://www.youtube.com/embed/" + url
+    video_url = "https://www.youtube.com/embed/" + url + "?enablejsapi=1"
     print(video_url)
     return templates.TemplateResponse("video.html", {"request": request, "video_title": video_title, "profname": profname, "url": video_url})
     
