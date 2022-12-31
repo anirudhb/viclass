@@ -40,7 +40,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
     await manager.connect(websocket)
     while True:
         data = await websocket.receive_text()
-        await manager.broadcast(f"Client {client_id}: {data}")
+        await manager.broadcast(f"{data}")
 
 
 
